@@ -1,0 +1,90 @@
+{% include 'staffheader.html'%}
+
+
+<!-- banner -->
+	<div class="pogoSlider" id="js-main-slider">
+		<div data-duration="2000" style="background-image:url(/static/images/b1.jpg);background-size: cover;height: 700px;padding-top: 200px">
+			<div>
+				<div class="container">
+				
+                    <center>
+<h1>Manage Category</h1>
+<form method="post">
+	{% if data['categoryupdate'] %}
+	<table class="table" style="width:500px;color: white">
+		<tr>
+			<th>Name</th>
+			<td><input type="text" required="" class="form-control" value="{{data['categoryupdate'][0]['category_name'] }}" name="fname"></td>
+		</tr>
+		
+		
+		<tr>
+			<th>Description</th>
+			<td><textarea name="dis" required="" class="form-control">{{data['categoryupdate'][0]['category_description']}}</textarea></td>
+		</tr>
+		
+		
+		<td align="center" colspan="2"><input type="submit" name="update" value="submit" class="btn btn-success"></td>
+	</table>
+{% else %}
+	<table class="table" style="width:500px;color: white">
+		<tr>
+			<th>Name</th>
+			<td><input type="text" required="" class="form-control" name="fname"></td>
+		</tr>
+		
+		
+		<tr>
+			<th>Description</th>
+			<td><textarea name="dis" required="" class="form-control"></textarea></td>
+		</tr>
+		
+		
+		<td align="center" colspan="2"><input type="submit" name="category" value="submit" class="btn btn-success"></td>
+	</table>
+{% endif %}
+</form>
+</center>
+              
+	
+				</div>
+			</div>
+		</div>
+
+		</div>
+
+<center>
+	<h1>view Category</h1>
+	<form>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>sino</th>
+				<th>Name</th>
+				<th>Description</th>
+				
+				
+			</tr>
+	{% for row in data['categoryview']%}
+    	<tr>
+    		<td>{{loop.index}}</td>
+    		<td>{{row['category_name']}}</td>
+    		<td>{{row['category_description'] }}</td>
+    	
+    		{% if row ['status']=="1"%}
+
+            <td><a class="btn btn-success" href="?action=inactive&cid={{row['category_id']}}">InActive</a></td>
+           
+{% elif row ['status']=="0"%}
+    			<td><a class="btn btn-success" href="?action=active&cid={{row['category_id']}}">Active</a></td>
+    	
+   	{% endif %}
+    		<td><a class="btn btn-success" href="?action=update&cid={{row['category_id']}}">update</a></td>
+    		
+    	</tr>
+    	{% endfor %}
+  
+    
+		</table>
+	</form>
+</center>
+{% include 'footer.html'%}

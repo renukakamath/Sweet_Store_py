@@ -1,0 +1,140 @@
+{% include 'adminheader.html'%}
+
+
+<!-- banner -->
+	<div class="pogoSlider" id="js-main-slider">
+		<div data-duration="2000" style="background-image:url(/static/images/b4.jpg);background-size: cover;height: 700px;padding-top: 200px">
+			<div>
+				<div class="container">
+<center>
+<h1>Manage Product</h1>
+<form method="post" enctype="multipart/form-data">
+	{% if data['productupdate']%}
+
+	<table class="table" style="width:500px">
+
+
+
+		<tr>
+			<th>SubCategory</th>
+			<td><select name="subcategory" class="form-control">
+				<option value="{{data['productupdate'][0]['subcategory_id'] }}">{{data['productupdate'][0]['subcategory_name'] }}</option>
+
+				<option>Select</option>
+
+				{% for row in data['subcategorydrop']%}
+				
+					<option value="{{row['subcategory_id']}}">{{row['subcategory_name']}}</option>
+			    {% endfor %}
+			</select></td>
+		</tr>
+
+		
+		<tr>
+			<th>Name</th>
+			<td><input type="text" required="" class="form-control" value="{{data['productupdate'][0]['product_name']}}" name="fname"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><textarea name="dis" required="" class="form-control">{{data['productupdate'][0]['product_description']}}</textarea></td>
+		</tr>
+		<tr>
+			<th>product Image</th>
+			<td><input type="file" required="" class="form-control" value="{{data['productupdate'][0]['product_image'] }}" name="imgg"></td>
+		</tr>
+		
+		<tr>
+			<th>Stock</th>
+			<td><input type="number" required="" class="form-control" value="{{data['productupdate'][0]['stock'] }}" name="stock"></td>
+		</tr>
+		
+
+		<td align="center" colspan="2"><input type="submit" name="update" value="submit" class="btn btn-success"></td>
+	</table>
+{% else %}
+	<table class="table" style="width:500px">
+
+	
+		<tr>
+			<th>SubCategory</th>
+			<td><select name="subcategory" class="form-control">
+				
+				<option>Select</option>
+				{% for row in data['subcategorydrop']%}
+				
+					<option value="{{row['subcategory_id'] }}">{{row['subcategory_name'] }}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		
+		<tr>
+			<th>Name</th>
+			<td><input type="text" required="" class="form-control" name="fname"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><textarea name="dis" required="" class="form-control"></textarea></td>
+		</tr>
+		<tr>
+			<th>product Image</th>
+			<td><input type="file" required="" class="form-control" name="imgg"></td>
+		</tr>
+		
+		<tr>
+			<th>Stock</th>
+			<td><input type="number" required="" class="form-control" name="stock"></td>
+		</tr>
+		
+
+		<td align="center" colspan="2"><input type="submit" name="product" value="submit" class="btn btn-success"></td>
+	</table>
+{% endif %}
+</form>
+</center>
+</div></div></div></div>
+<center>
+	<h1>view Product</h1>
+	<form>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>sino</th>
+				
+				<th>SubCategory</th>
+				
+				
+				<th>Name</th>
+				<th>Description</th>
+				<th>product Image</th>
+				
+				<th>Stock</th>
+				
+			</tr>
+			{% for row in data['productview']%}
+    	<tr>
+    		<td>{{loop.index}}</td>
+    	
+    		<td>{{row['subcategory_name'] }}</td>
+    		
+    		<td>{{row['product_name']}}</td>
+    		<td>{{row['product_description'] }}</td>
+    		<td><img src="/{{row['product_image'] }}" height="100" width="100"></td>
+    		
+    		<td>{{row['stock'] }}</td>
+    		
+    	{% if row['product_status']=="1"%}
+              
+              	<td><a class="btn btn-success" href="?action=notavailable&pid={{row['product_id']}}">Not Available</a></td>
+         {% elif row['product_status']=="0"%}
+
+         	<td><a class="btn btn-success" href="?action=available&pid={{row['product_id']}}"> Available</a></td>
+       {% endif %}
+
+    		 	<td><a class="btn btn-success" href="?action=update&pid={{row['product_id']}}">update</a></td>
+    		
+    	</tr>
+    	{% endfor %}
+   
+		</table>
+	</form>
+</center>
+{% include 'footer.html'%}

@@ -1,0 +1,55 @@
+{% include 'adminheader.html'%}
+
+
+<!-- banner -->
+  <div class="pogoSlider" id="js-main-slider">
+    <div data-duration="2000" style="background-image:url(/static/images/b1.jpg);background-size: cover;height: 700px;padding-top: 200px">
+      <div>
+        <div class="container">
+<center>
+	<h1>view Bookings</h1>
+	<form>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>sino</th>
+				<th>Customer</th>
+				<th>category</th>
+				<th>SubCategory</th>
+				
+				
+				<th>Name</th>
+				<th>Description</th>
+				<th> Image</th>
+				<th> price</th>
+				<th>quantity</th>
+				<th>Status</th>
+				
+				
+			</tr>
+			{% for row in data['bookingview']%}
+    	<tr>
+    		<td>{{loop.index}}</td>
+    		<th>{{row['customer_fname']}}</th>
+    		<td>{{row['category_name']}}</td>
+    		<td>{{row['subcategory_name'] }}</td>
+    	
+    		<td>{{row['product_name']}}</td>
+    		<td>{{row['product_description'] }}</td>
+    		<td><img src="/{{row['product_image'] }}" height="100" width="100"></td>
+    		<td>{{row['total_price']}}</td>
+    		
+    		<td>{{row['quantity'] }}</td>
+    		<td>{{row['order_status']}}</td>
+    		<td><a href="admin_viewpayment?oid={{row['order_master_id']}}">View Payment</a></td>
+    		
+   
+    		
+    	</tr>
+    	{% endfor %}
+   
+		</table>
+	</form>
+</center>
+
+</div></div></div></div>
+{% include 'footer.html'%}

@@ -1,0 +1,49 @@
+{% include 'staffheader.html'%}
+
+
+<!-- banner -->
+  <div class="pogoSlider" id="js-main-slider">
+    <div data-duration="2000" style="background-image:url(/static/images/b1.jpg);background-size: cover;height: 700px;padding-top: 200px">
+      <div>
+        <div class="container">
+<center>
+	<h1>view complaint</h1>
+	<form>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>sino</th>
+				
+				
+				<th>Name</th>
+				<th>Complaint</th>
+				
+				<th>date</th>
+				<th>Reply</th>
+				
+				
+			</tr>
+			{% for row in data['complaintview']%}
+    	<tr>
+    		<td>{{loop.index}}</td>
+    		<td>{{row['customer_fname']}}</td>
+    		<td>{{row['complaint'] }}</td>
+    		
+    		<td>{{row['date']}}</td>
+    		{% if row['reply']=="pending"%}
+    		<td><a href="admin_sendreply?cid={{row['complaint_id']}}">Send Reply</a></td>
+    		{% else %}
+
+    		<td>{{row['reply']}}</td>
+    		{% endif %}
+    		
+    	      
+    		
+    	</tr>
+    	{% endfor %}
+   
+		</table>
+	</form>
+</center>
+
+</div></div></div></div>
+{% include 'footer.html'%}

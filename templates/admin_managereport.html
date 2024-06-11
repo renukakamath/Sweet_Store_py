@@ -1,0 +1,76 @@
+{% include 'adminheader.html'%}
+
+<!-- banner -->
+  <div class="pogoSlider" id="js-main-slider">
+    <div data-duration="2000" style="background-image:url(/static/images/b2.jpg);background-size: cover;height: 700px;padding-top: 200px">
+      <div>
+        <div class="container">
+  <center>
+  <h1>SEARCH SALES</h1>
+  <form method="post">
+    <table style="color: black;width: 100px">
+
+  
+       <td style="color: white"><input type="date" name="daily" > DAILY </td>
+        <td  style="color: white"> <input type="month" name="monthly"> MONTHLY </td>
+        <td  style="color: white"> <input type="text" name="customer" placeholder="Search by Customer"> CUSTOMER </td>
+
+     <tr>
+       <td align="center" colspan="5"><input type="submit" name="sale" class="btn btn-success" value="SEARCH"></td>
+      </tr>
+    
+
+      </tr>
+    </table>
+  </form>
+</center>
+
+</div></div></div></div>
+<center>
+	<h1>view Sales Report</h1>
+	  <h2><a class="btn btn-success" href="admin_salesreport">print</a></h2>
+	<form>
+
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>sino</th>
+					<th>Customer</th>
+				<th>category</th>
+				<th>SubCategory</th>
+			
+
+				
+				<th>Name</th>
+				<th>Description</th>
+				<th> Image</th>
+				<th> price</th>
+				<th>quantity</th>
+				<th>Status</th>
+				
+				
+			</tr>
+			{% for row in data['report']%}
+    	<tr>
+    		<td>{{loop.index}}</td>
+    		<td>{{row['customer_fname']}}</td>
+    		<td>{{row['category_name']}}</td>
+    		<td>{{row['subcategory_name'] }}</td>
+    	
+    		<td>{{row['product_name']}}</td>
+    		<td>{{row['product_description'] }}</td>
+    		<td><img src="/{{row['product_image'] }}" height="100" width="100"></td>
+    		<td>{{row['total_price']}}</td>
+    		
+    		<td>{{row['quantity'] }}</td>
+    		<td>{{row['order_status']}}</td>
+    		
+    		
+   
+    		
+    	</tr>
+    	{% endfor %}
+   
+		</table>
+	</form>
+</center>
+{% include 'footer.html'%}

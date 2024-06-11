@@ -1,0 +1,62 @@
+{% include 'customerheader.html'%}
+
+
+<!-- banner -->
+	<div class="pogoSlider" id="js-main-slider">
+		<div data-duration="2000" style="background-image:url(/static/images/b2.jpg);background-size: cover;height: 700px;padding-top: 100px">
+			<div>
+				<div class="container">
+
+<script type="text/javascript">
+	function TextOnTextChange()
+	{
+		var x =document.getElementById("p_amount").value;
+		var y =document.getElementById("p_qnty").value;
+		document.getElementById("t_amount").value = x * y;
+	}
+
+</script> 
+<center>
+<h1 style="color: white">Add To Cart</h1>
+<form method="post" enctype="multipart/form-data">
+
+	<table class="table" style="width:500px;color: white">
+
+		<tr>
+			
+			<td align="center" colspan="2"><img src="/{{data['pimg']}}" width="100" height="100"></td>
+		</tr>
+		<tr>
+			<th>Product Name</th>
+			<td><input type="text" required="" value="{{data['pname']}}" class="form-control" name="fname"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><textarea name="dis" required=""  class="form-control">{{data['pdis']}}</textarea></td>
+		</tr>
+		
+		<tr>
+			<th>Amount</th>
+			<td><input type="number" required="" class="form-control" value="{{data['pamo']}}" readonly=""  id="p_amount" name="amount"></td>
+		</tr>
+
+		
+		<tr>
+			<th>quantity</th>
+			<td><input type="number" required="" class="form-control"  id="p_qnty" onchange="TextOnTextChange()" name="quantity"></td>
+		</tr>
+		<tr>
+			<th>Total</th>
+			<td><input type="number" required="" class="form-control" readonly="" id="t_amount" name="total"></td>
+		</tr>
+		
+		<td align="center" colspan="2"><input type="submit" name="cart" value="submit" class="btn btn-success"></td>
+	</table>
+
+</form>
+</center>
+
+
+</div></div></div></div>
+
+{% include 'footer.html'%}

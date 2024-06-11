@@ -1,0 +1,88 @@
+{% include 'customerheader.html'%}
+
+
+
+
+<!-- middle slider -->
+	<div class="projects py-5">
+
+		<h1>view Product</h1>
+
+
+
+		<center>
+	<form method="post">
+			<table>
+				<tr>
+					<td><input type="text" placeholder="search here....." name="product"></td>
+					<td><input type="submit" class="btn btn-success" name="search"></td>
+				</tr>
+			</table>
+	</form>
+</center>
+		<div class="projects-grids py-xl-5 py-lg-3">
+
+			
+			<div class="sreen-gallery-cursual">
+
+				<div class="container">
+					<div class="row">
+
+{% for row in data['productsearch']%}
+
+	<div class="item col-sm-3">
+
+							
+							<div class="projects-agile-grid-info">
+								<img style="height: 300px;width: 300px" src="/{{row['product_image'] }}" alt="" class="img-fluid" />
+								<div class="projects-grid-caption text-center mt-4">
+									<h4>Product Name:{{row['product_name']}}</h4>
+									<h4>category:{{row['category_name']}}</h4>
+									<h4>SubCategory:{{row['subcategory_name']}}</h4>
+									<p class="my-2">Description:{{row['product_description'] }}</p>
+									<a href="#">Rate:{{row['selling_price']}}</a>
+
+									{% if row['stock'] | int > 0%}
+    		<a href="customer_addtocart?pid={{row['product_id']}}&pname={{row['product_name']}}&pdis={{row['product_description']}}&pimg={{row['product_image']}}&pamo={{row['selling_price']}}&stock={{row['stock']}}">Add To Cart</a>
+
+    		{% elif row['stock'] | int <= 0%}
+
+   
+            <a class="btn btn-success" href="#">Out  Of  Stock</a>
+             {% endif %}
+
+								</div>
+							</div>
+
+							
+						</div>
+
+
+
+{% endfor %}
+						
+					</div>
+				</div>
+
+				
+			
+
+					
+
+
+				
+			</div>
+
+				
+		</div>
+	</div>
+	<!-- //middle slider -->
+
+
+
+    		
+         
+    	
+    	
+   
+{% include 'footer.html'%}

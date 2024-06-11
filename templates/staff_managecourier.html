@@ -1,0 +1,164 @@
+{% include 'staffheader.html'%}
+
+<!-- banner -->
+	<div class="pogoSlider" id="js-main-slider">
+		<div data-duration="2000" style="background-image:url(/static/images/b5.jpg);background-size: cover;height: 700px;padding-top: 200px">
+			<div>
+				<div class="container">
+<center>
+<h1>Manage courier</h1>
+<form method="post">
+
+	{% if data['courierupdate']%}
+
+	<table class="table" style="width:500px">
+		<tr>
+			<th>Name</th>
+			<td><input type="text" required="" class="form-control" value="{{data['courierupdate'][0]['courier_name']}}" name="fname"></td>
+		</tr>
+		
+		<tr>
+			<th>Building Name</th>
+			<td><input type="text" required="" class="form-control" value="{{data['courierupdate'][0]['courier_building_name']}}"  name="hno"></td>
+		</tr>
+
+		<tr>
+			<th>Street</th>
+			<td><input type="text" required="" class="form-control" value="{{data['courierupdate'][0]['courier_street']}}"   name="street"></td>
+		</tr>
+
+		<tr>
+			<th>City</th>
+			<td><input type="text" required="" class="form-control" value="{{data['courierupdate'][0]['courier_city']}}"  name="city"></td>
+		</tr>
+
+		<tr>
+			<th>State</th>
+			<td><input type="text" required="" class="form-control" value="{{data['courierupdate'][0]['courier_state']}}" name="state"></td>
+		</tr>
+<tr>
+			<th>Pincode</th>
+			<td><input type="text" required="" pattern="[0-9]{6}" value="{{data['courierupdate'][0]['courier_pincode']}}" class="form-control"  name="pin"></td>
+		</tr>
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" required="" pattern="[0-9]{10}" class="form-control" value="{{data['courierupdate'][0]['courier_phone']}}"    name="num"></td>
+		</tr>
+		<tr>
+			<th>E-Mail</th>
+			<td><input type="email" required="" class="form-control" value="{{data['courierupdate'][0]['courier_email']}}"  name="email"></td>
+		</tr>	
+		
+		
+		
+		
+		<td align="center" colspan="2"><input type="submit" name="up" value="submit" class="btn btn-success"></td>
+	</table>
+{% else %}
+	<table class="table" style="width:500px">
+			<tr>
+			<th>Name</th>
+			<td><input type="text" required="" class="form-control"  name="fname"></td>
+		</tr>
+		
+		<tr>
+			<th>Building Name</th>
+			<td><input type="text" required="" class="form-control"name="hno"></td>
+		</tr>
+
+		<tr>
+			<th>Street</th>
+			<td><input type="text" required="" class="form-control"    name="street"></td>
+		</tr>
+
+		<tr>
+			<th>City</th>
+			<td><input type="text" required="" class="form-control"  name="city"></td>
+		</tr>
+
+		<tr>
+			<th>State</th>
+			<td><input type="text" required="" class="form-control" name="state"></td>
+		</tr>
+<tr>
+			<th>Pincode</th>
+			<td><input type="text" required="" pattern="[0-9]{6}"  class="form-control"  name="pin"></td>
+		</tr>
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" required="" pattern="[0-9]{10}" class="form-control"  name="num"></td>
+		</tr>
+		<tr>
+			<th>E-Mail</th>
+			<td><input type="email" required="" class="form-control"  name="email"></td>
+		</tr>	
+		
+	
+
+		<tr>
+			<th>User Name</th>
+			<td><input type="email" required="" class="form-control"  name="uname"></td>
+		</tr>
+		<tr>
+			<th>Password</th>
+			<td><input type="password" required="" class="form-control" name="pwd"></td>
+		</tr>
+		
+		<td align="center" colspan="2"><input type="submit" name="courier" value="submit" class="btn btn-success"></td>
+	</table>
+{% endif %}
+</form>
+</center>
+</div></div></div></div>
+
+<center>
+	<h1>view courier</h1>
+	<form>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>sino</th>
+				<th>Name</th>
+				<th>Building Name</th>
+				<th>Street</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Pincode</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Date</th>
+				
+	
+			</tr>
+	{% for row in data['courierview']%}
+    	<tr>
+    		<td>{{loop.index}}</td>
+    		<td>{{row['courier_name'] }}</td>
+    		<td>{{row['courier_building_name'] }}</td>
+
+    		<td>{{row['courier_street'] }}</td>
+    		<td>{{row['courier_city'] }}</td>
+    		<td>{{row['courier_state'] }}</td>
+    		<td>{{row['courier_pincode'] }}</td>
+    		<td>{{row['courier_phone']}}</td>
+    		<td>{{row['courier_email']}}</td>
+    		<td>{{row['date_added']}}</td>
+    		
+
+    		{% if row ['courier_status']=="1"%}
+              <td><a class="btn btn-success" href="?action=inactive&vid={{row['courier_id']}}">InActive</a></td>
+            
+             {% elif row ['courier_status']=="0"%}
+             	<td><a class="btn btn-success" href="?action=active&vid={{row['courier_id']}}">Active</a></td>
+         
+           {% endif %}
+      <td><a class="btn btn-success" href="?action=update&vid={{row['courier_id']}}">Update</a></td>
+             
+    	</tr>
+    	{% endfor %}
+    
+		</table>
+    
+	</form>
+</center>
+
+{% include 'footer.html'%}
